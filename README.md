@@ -1,19 +1,44 @@
 # Euphonium: Steering Video Flow Matching via Process Reward Gradient Guided Stochastic Dynamics
 
-Euphonium is a framework for fine-tuning the HunyuanVideo video generation model using the GRPO (Group Relative Policy Optimization) algorithm through reinforcement learning with Reward Gradient Guidance (RGG).
+[![arXiv](https://img.shields.io/badge/arXiv-2602.04928-b31b1b.svg)](https://arxiv.org/abs/2602.04928)
 
-[中文版](README_zh.md)
+Euphonium is a novel framework for steering video flow matching via process reward gradient guided stochastic dynamics. It employs a Dual-Reward Group Relative Policy Optimization algorithm that combines latent process rewards for efficient credit assignment and pixel-level outcome rewards for visual fidelity, significantly accelerating training convergence.
+
+## 📝 TODO
+
+- [x] Release training scripts
+- [x] Release inference scripts
+- [ ] Release reward model checkpoints
+
+## Pipeline
+
+<div align="center">
+  <img src="assets/pipeline.png" width="100%">
+</div>
+
+## Abstract
+
+While online Reinforcement Learning has emerged as a crucial technique for aligning flow matching models with human preferences, current approaches are hindered by inefficient exploration during training rollouts. Relying on undirected stochasticity and sparse outcome rewards, these methods struggle to discover high-reward samples, resulting in data-inefficient and slow optimization. To address these limitations, we propose Euphonium, a novel framework that steers generation via process reward gradient guided dynamics. Our key insight is to formulate the sampling process as a theoretically principled Stochastic Differential Equation that explicitly incorporates the gradient of a Process Reward Model into the flow drift. This design enables dense, step-by-step steering toward high-reward regions, advancing beyond the unguided exploration in prior works, and theoretically encompasses existing sampling methods (e.g., Flow-GRPO, DanceGRPO) as special cases. We further derive a distillation objective that internalizes the guidance signal into the flow network, eliminating inference-time dependency on the reward model. We instantiate this framework with a Dual-Reward Group Relative Policy Optimization algorithm, combining latent process rewards for efficient credit assignment with pixel-level outcome rewards for final visual fidelity. Experiments on text-to-video generation show that Euphonium achieves better alignment compared to existing methods while accelerating training convergence by 1.66x.
 
 ## 🚀 Quick Start
 
 ### Clone the Repository
 
 ```bash
-git clone --recursive https://github.com/your-org/Euphonium.git
+git clone --recursive https://github.com/zerzerzerz/Euphonium.git
 cd Euphonium
 ```
 
-> **Note**: The `--recursive` flag is required to properly initialize the submodules (Latent_PRM and SoliReward).
+> **Note**: The `--recursive` flag is required to properly initialize the submodules.
+
+### Submodules
+
+This repository contains the following submodules in `third_party/`:
+
+| Submodule      | Description                                                                     | Repository                                         |
+| -------------- | ------------------------------------------------------------------------------- | -------------------------------------------------- |
+| **Latent_PRM** | Latent-space Process Reward Model for training rollout reward gradient guidance | [GitHub](https://github.com/zerzerzerz/Latent_PRM) |
+| **SoliReward** | Pixel-space Outcome Reward Model for visual fidelity                            | [GitHub](https://github.com/lian700/SoliReward)    |
 
 ## 🔧 Environment Setup
 
@@ -36,8 +61,8 @@ The following models are required:
   - Download from [Hugging Face](https://huggingface.co/tencent/HunyuanVideo)
 
 - **Reward Models** (Required):
-  - **SoliReward** (pixel-space ORM, e.g., InternVL3-1B) - **Required**
-  - **Latent PRM** (latent-space Process Reward Model) - **Required**
+  - **SoliReward** (pixel-space ORM, e.g., InternVL3-1B) - **Required** - *Checkpoints coming soon*
+  - **Latent PRM** (latent-space Process Reward Model) - **Required** - *Checkpoints coming soon*
   - VideoAlign reward model - **Optional**
 
 ---
@@ -173,7 +198,7 @@ If you use Euphonium, please cite our paper:
 }
 ```
 
-**Paper**: [arXiv:2602.04928](https://arxiv.org/abs/2602.04928)
+
 
 ## 📄 License
 
@@ -183,6 +208,7 @@ Apache License 2.0
 
 We would like to thank the following projects for their contributions:
 - https://github.com/XueZeyue/DanceGRPO
-- https://github.com/huggingface/diffusers
+- https://github.com/yifan123/flow_grpo
 - https://github.com/hao-ai-lab/FastVideo
+- https://github.com/huggingface/diffusers
 - https://github.com/Tencent-Hunyuan/HunyuanVideo
