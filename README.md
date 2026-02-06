@@ -8,7 +8,7 @@ Euphonium is a novel framework for steering video flow matching via process rewa
 
 - [x] Release training scripts
 - [x] Release inference scripts
-- [ ] Release reward model checkpoints
+- [x] Release reward model checkpoints
 
 ## Pipeline
 
@@ -61,9 +61,19 @@ The following models are required:
   - Download from [Hugging Face](https://huggingface.co/tencent/HunyuanVideo)
 
 - **Reward Models** (Required):
-  - **SoliReward** (pixel-space ORM, e.g., InternVL3-1B) - **Required** - *Checkpoints coming soon*
-  - **Latent PRM** (latent-space Process Reward Model) - **Required** - *Checkpoints coming soon*
+  - **SoliReward** (pixel-space ORM, e.g., InternVL3-1B) - **Required**
+  - **Latent PRM** (latent-space Process Reward Model) - **Required**
   - VideoAlign reward model - **Optional**
+
+  The reward models are available at [HuggingFace](https://huggingface.co/Yukino271828/SoliReward). To train Euphonium, you only need the physics deformity ORM and the latent PRM. You can download them using the following commands:
+
+  ```bash
+  # Download Physics Deformity ORM
+  huggingface-cli download Yukino271828/SoliReward --include "pixel_orm/physics-deformity-HPQA-InternVL3-1B/*" --local-dir checkpoints/SoliReward
+
+  # Download Latent PRM
+  huggingface-cli download Yukino271828/SoliReward --include "latent_prm/*" --local-dir checkpoints/SoliReward
+  ```
 
 ---
 
