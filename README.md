@@ -1,4 +1,4 @@
-# Euphonium: Steering Video Flow Matching via Process Reward Gradient Guided Stochastic Dynamics
+# <img src="assets/euphonium-removebg-preview.png" height="35" align="center"/> Euphonium: Steering Video Flow Matching via Process Reward Gradient Guided Stochastic Dynamics
 
 [![arXiv](https://img.shields.io/badge/arXiv-2602.04928-b31b1b.svg)](https://arxiv.org/abs/2602.04928)
 
