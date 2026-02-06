@@ -1,0 +1,6 @@
+[submodule "third_party/SoliReward"]
+	path = third_party/SoliReward
+	url = https://github.com/lian700/SoliReward.git
+[submodule "third_party/Latent_PRM"]
+	path = third_party/Latent_PRM
+	url = https://github.com/zerzerzerz/Latent_PRM
